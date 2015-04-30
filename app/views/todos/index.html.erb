@@ -1,0 +1,33 @@
+<h2>Todo list</h2>
+<div>
+	<%= link_to "Your new todo", new_todo_path %>
+</div>
+<br>
+Search for
+<%= form_tag todos_path, method:"get" do %>
+	<%= hidden_field_tag :finishOrNot, true %>
+	<%=submit_tag "What you have finished" %>
+<% end %>
+<%= form_tag todos_path, method:"get" do %>
+	<%= hidden_field_tag :finishNot, false %>
+	<%=submit_tag "What you haven't finished" %>
+<% end %>
+
+<br>
+<% @todos.each do |todo|%>
+
+<%=todo.content %>
+	<% if todo.finishOrNot ==false %>
+		(Not yet finished)
+	<% else %>
+		(Finished)
+<% end %>
+<% if todo.finishOrNot ==false %>
+	<%=button_to "Turn to Finished", finish_todo_path(todo),method: :post %>
+<% else %>
+	<%=button_to "Turn to not finished", finish_todo_path(todo),method: :post %>
+<% end %>
+<%= link_to "Delete todo", todo_path(todo),method:"delete" %>
+<%= link_to "Edit your todo", edit_todo_path(todo) %>
+<br>
+<% end %>

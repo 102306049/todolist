@@ -1,0 +1,13 @@
+<h2>Edit your todo</h2>
+<%= form_for @todo do |f|%>
+	<div>
+		new todo thing
+		<%= f.text_field :content %>
+	</div>
+	<div>
+		finished or not?
+		<%= f.check_box :finishOrNot %> Yes!
+	</div>
+
+	<%=f.submit %>
+<% end %>
